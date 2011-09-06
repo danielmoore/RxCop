@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Rules FriendlyName="Reactive Extensions Rules">
+  <!-- 
+    Usage 
+  -->
+  <Rule TypeName="DoNotUseBlockingCalls" Category="NorthHorizon.Usage" CheckId="RX1001">
+    <Name>Do not use a blocking call on an observable sequence.</Name>
+    <Description>A blocking call on an asynchronous source will cause the current thread to wait until a value comes through.This can cause problems in performance and deadlocks.</Description>
+    <Url></Url>
+    <Resolution Name="First">Use Take(1).Subscribe instead.</Resolution>
+    <Resolution Name="FirstOrDefault">Use Take(1).DefaultIfEmpty().Subscribe instead.</Resolution>
+    <Resolution Name="Last">Use TakeLast(1).Subscribe instead.</Resolution>
+    <Resolution Name="LastOrDefault">Use TakeLast(1).DefaultIfEmpty().Subscribe instead.</Resolution>
+    <Resolution Name="ToEnumerable"><![CDATA[Consider passing IObservable<T> instead.]]></Resolution>
+    <Resolution Name="ToList"><![CDATA[Consider passing IObservable<T> instead.]]></Resolution>
+    <Resolution Name="ToDictionary"><![CDATA[Consider passing IObservable<IGroupedObservable<TKey, TElement>> from a GroupBy operation instead.]]></Resolution>
+    <MessageLevel Certainty="90">CriticalWarning</MessageLevel>
+    <Email></Email>
+    <FixCategories>Breaking</FixCategories>
+    <Owner></Owner>
+  </Rule>
+  <Rule TypeName="UseExplicitSchedulers" Category="NorthHorizon.Usage" CheckId="RX1002">
+    <Name>Provide a scheduler explicitly on calls that create concurrency when possible.</Name>
+    <Description>If a scheduler is not passed to a a call that has the option of taking one, it will choose its own scheduler which can cause deadlocks.</Description>
+    <Url></Url>
+    <Resolution>Provide a known scheduler explicitly</Resolution>
+    <MessageLevel Certainty="90">Warning</MessageLevel>
+    <Email></Email>
+    <FixCategories>NonBreaking</FixCategories>
+    <Owner></Owner>
+  </Rule>
+  
+  <!-- 
+    Design
+  -->
+  <Rule TypeName="DoNotImplementFrameworkInterfaces" Category="NorthHorizon.Design" CheckId="RX2001">
+    <Name>Do not implement reactive framework interfaces unless you are creating a generic construct.</Name>
+    <Description>When possible, use interface factory methods that are part of the framework, rather than implementing them directly. If you are creating a new generic observable construct, suffix the concrete class with the type of the interface to indicate its generality.</Description>
+    <Url></Url>
+    <Resolution Name="IObservable`1">Use Observable.Generate or Observable.Create instead.</Resolution>
+    <Resolution Name="IObserver`1">Use the Subscribe extension method that provides delegates for OnNext, OnError, and OnCompleted.</Resolution>
+    <Resolution Name="ISubject`1">Use a Select-Switch or Select-Merge pattern.</Resolution>
+    <Resolution Name="ISubject`2">Use a Select-Switch or Select-Merge pattern or Subject.Create</Resolution>
+    <MessageLevel Certainty="90">Warning</MessageLevel>
+    <Email></Email>
+    <FixCategories>NonBreaking</FixCategories>
+    <Owner></Owner>
+  </Rule>
+</Rules>
