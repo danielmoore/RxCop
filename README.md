@@ -1,24 +1,39 @@
 # RxCop
 
-RxCop is a rule library that works with FxCop to provide additional 
-checking for your observable sequences.
+RxCop is a rule library that works with FxCop to provide additional checking 
+for your observable sequences.
 
 ## Getting Started
 
-To use RxCop, you will need to have installed FxCop 10.0 (included in the [Windows SDK v7.1][1])
+To use RxCop, you will need to have installed FxCop 10.0 (included in the
+[Windows SDK v7.1][1] and Visual Studio 2010 Premium and Ultimate)
 
-**Note:** FxCop 1.36 is included with Visual Studio 2010. I have not tested this version.
+### Visual Studio Installation
 
-  1. Open your FxCop project, or create a new one.
-  2. Go to *Project > Add Rules*
-  3. Find RxCop.dll
-  4. Choose the 'Rules' tab and verify 'Reactive Extensions Rules' is present
-  5. Customize the active rules.
+  1. Build or obtain RxCop.dll from the downloads.
+  2. Copy RxCop.dll to "${env:ProgramFiles(x86)}\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\Rules"
+  3. Navigate to the desired project's property page
+  4. Choose the *Code Analysis* tab.
+  5. Click the *Open* button
+  6. If this is not a custom ruleset, choose *File > Save As...* and create a new file.
+  7. Choose *Group by: Category*
+  8. If you cannot find NorthHorizon.Design or NorthHorizon.Usage, right click in the grid area and choose *Show rules that are not enabled*
 
-To build the source, you will need C# and F# 4.0 in addition to FxCop 10.0. The rules are 
-written in F# and the test cases are written in C#.
+At least you don't have to modify the registry.
 
-### Helpful Resources
+### FxCop Standalone Installation
+
+  1. Build or obtain RxCop.dll from the downloads.
+  2. Open your FxCop project, or create a new one.
+  3. Go to *Project > Add Rules*
+  4. Find RxCop.dll
+  5. Choose the 'Rules' tab and verify 'Reactive Extensions Rules' is present
+  6. Customize the active rules.
+
+## Hacking RxCop
+
+To build the source, you will need C# and F# 4.0 in addition to FxCop 10.0. The
+rules are written in F# and the test cases are written in C#.
 
 I have found [Jason Kresowaty's documentation][2] to be an excelent guide to working with
 FxCop, which is otherwise undocumetned. He also has a useful 'Introspector' tool, which I
